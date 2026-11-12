@@ -1,0 +1,22 @@
+EXPORT cic()
+BEGIN
+  LOCAL x1, x2, y1, y2, z1, z2;
+  LOCAL o1, o2, p1, p2;
+  LOCAL ra1, ra2, ph1, ph2;
+  LOCAL r, rm;
+  LOCAL v, vm;
+  LOCAL a, am;
+  LOCAL ta, va, bi, no, at, an, cu, rc;
+  LOCAL res;
+
+//Cilindricas a cartesianas 
+
+  CAS("x := p(t)*cos(o(t))");
+  CAS("y := p(t)*sin(o(t))");
+
+//Cilindricas a esfericas
+
+  CAS("ra:= sqrt(p(t)^2+z(t)^2)");
+  CAS("ph:= arcos(z(t)/p(t))");
+
+END;

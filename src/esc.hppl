@@ -1,0 +1,23 @@
+EXPORT esc()
+BEGIN
+  LOCAL x1, x2, y1, y2, z1, z2;
+  LOCAL o1, o2, p1, p2;
+  LOCAL ra1, ra2, ph1, ph2;
+  LOCAL r, rm;
+  LOCAL v, vm;
+  LOCAL a, am;
+  LOCAL ta, va, bi, no, at, an, cu, rc;
+  LOCAL res;
+
+//Esfericas a cartesianas
+
+  CAS("x := ra(t)*sin(ph(t))*cos(o(t))");
+  CAS("y := ra(t)*sin(ph(t))*sen(o(t))");
+  CAS("z := ra(t)*cos(ph(t))")
+
+//Esfericas a cilindricas
+
+  CAS("p := ra(t)*sin(ph(t))");
+  
+
+END;

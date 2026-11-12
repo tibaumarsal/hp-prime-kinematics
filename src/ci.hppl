@@ -1,0 +1,288 @@
+EXPORT ci()
+BEGIN
+  LOCAL x1, x2, y1, y2, z1, z2;
+  LOCAL o1, o2, p1, p2;
+  LOCAL ra1, ra2, ph1, ph2;
+  LOCAL r, rm;
+  LOCAL v, vm;
+  LOCAL a, am;
+  LOCAL ta, va, bi, no, at, an, cu, rc;
+  LOCAL res;
+
+// Derivar y operar usando CAS y guardar en variable local:
+
+  CAS("p1:=simplify(diff(p))");
+  CAS("p2:=simplify(diff(p1))");
+
+  CAS("o1:=simplify(diff(o))");
+  CAS("o2:=simplify(diff(o1))");
+
+  CAS("z1:=simplify(diff(z))");
+  CAS("z2:=simplify(diff(z1))");
+
+  CAS("r := [ p(t), z(t) ]");
+  r:=CAS("r");
+
+  CAS("rm := sqrt(p(t)^2 + z(t)^2)");
+  rm:=CAS("rm");
+
+  CAS("v := [ p1(t), p(t)*o1(t), z1(t) ]");
+  v:=CAS("v");
+  CAS("vm:= sqrt(p1(t)^2 + (p(t)*o1(t))^2 + z1(t)^2)");
+  vm:=CAS("vm");
+
+  CAS("a := [ p2(t)-p(t)*o1(t)^2, p(t)*o2(t)+2*p1(t)*o1(t), z2(t) ]");
+  a:=CAS("a");
+  CAS("am:= sqrt((p2(t)-p(t)*o1(t)^2)^2 + (p(t)*o2(t)+2*p1(t)*o1(t))^2 + z2(t)^2)");
+  am:=CAS("am");
+
+  CAS("ta := v/vm ");
+  ta:=CAS("ta");
+
+  CAS("va := cross(v,a)");
+  CAS("bi := cross(v,a)/sqrt(va(1)^2+va(2)^2+va(3)^2))");
+  bi:=CAS("bi");
+
+  CAS("no := cross(bi,ta)");
+  no:=CAS("no");
+
+  CAS("at := a*ta");
+  at:=CAS("at");
+
+  CAS("an := a*no");
+  an:=CAS("an");
+
+  CAS("cu := sqrt(va(1)^2+va(2)^2+va(3)^2)/vm^3");
+  cu:=CAS("cu");
+
+  CAS("rc := 1/cu");
+  rc:=CAS("rc");
+
+
+// Mostrar en pantalla
+  PRINT();
+
+  res := "r(t) = " + STRING(r(1)) + " ep + " + STRING(r(2)) + " ez + ";
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "v(t) = " + STRING(v(1)) + " ep + " + STRING(v(2)) + " eo + " + STRING(v(3)) + " ez ";
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "a(t) = " + STRING(a(1)) + " ep + " + STRING(a(2)) + " eo + " + STRING(a(3)) + " ez ";
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "||r(t)|| = " + STRING(rm);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "||v(t)|| = " + STRING(vm);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "||a(t)|| = " + STRING(am);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "ta(t) = " + STRING(ta(1)) + " ep + " + STRING(ta(2)) + " eo + " + STRING(ta(3)) + " ez ";
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");    
+  PRINT(res);
+
+  res := "bi(t) = " + STRING(bi(1)) + " ep + " + STRING(bi(2)) + " eo + " + STRING(bi(3)) + " ez ";
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "no(t) = " + STRING(no(1)) + " ep + " + STRING(no(2)) + " eo + " + STRING(no(3)) + " ez ";
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");    
+  PRINT(res);
+
+  res := "at = " + STRING(at);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");   
+  PRINT(res);
+
+  res := "an = " + STRING(an);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+  res := "cu = " + STRING(cu);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+ 
+  res := "rc = " + STRING(rc);
+  res := REPLACE(res, "diff(x(t),t,2)", "x(t)''");
+  res := REPLACE(res, "diff(x(t),t)", "x(t)'");
+  res := REPLACE(res, "diff(y(t),t,2)", "y(t)''");
+  res := REPLACE(res, "diff(y(t),t)", "y(t)'");
+  res := REPLACE(res, "diff(z(t),t,2)", "z(t)''");
+  res := REPLACE(res, "diff(z(t),t)", "z(t)'");
+  res := REPLACE(res, "diff(p(t),t,2)", "p(t)''");
+  res := REPLACE(res, "diff(p(t),t)", "p(t)'");
+  res := REPLACE(res, "diff(o(t),t,2)", "o(t)''");
+  res := REPLACE(res, "diff(o(t),t)", "o(t)'");  
+  res := REPLACE(res, "diff(ra(t),t,2)", "ra(t)''");
+  res := REPLACE(res, "diff(ra(t),t)", "ra(t)'");
+  res := REPLACE(res, "diff(ph(t),t,2)", "ph(t)''");
+  res := REPLACE(res, "diff(ph(t),t)", "ph(t)'");  
+  PRINT(res);
+
+
+
+END;
